@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %} {% endblock %}</title>
+
+	{% include 'components/v_head.html' %}
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+	<div class="wrapper">
+		{% include 'components/v_notification_alert.html' %}
+		{% include 'components/v_user_navbar_user.html' %}
+		{% include 'components/v_user_sidebar.html' %}
+
+		<div class="content-wrapper">
+			{% block body %} {% endblock %}
+		</div>
+
+		{% include 'components/v_footer.html' %}
+	<div/>
+
+	{% include 'components/v_foot.html' %}
+	
+</body>
+</html>
