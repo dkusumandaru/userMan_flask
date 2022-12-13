@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    var table = $('#application').DataTable();
+    var table = $('#role').DataTable();
 
-    $('#application').on('click','.edit_record',function(){
+    $('#role').on('click','.edit_record',function(){
       $('#edit [name="id"]').val('');
       var id=$(this).data('id');
       var name=$(this).data('name');
@@ -29,7 +29,7 @@ $(document).ready(function(){
         paramPush = idArr[0];
         Swal.fire({
           title: 'Create',
-          html: 'Are you sure to Create New <b>Application : '+valuePush+'</b> ?',
+          html: 'Are you sure to Create New <b>Role : '+valuePush+'</b> ?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -72,7 +72,7 @@ $(document).ready(function(){
         // paramPush = nameArr[0];
         Swal.fire({
           title: 'Edit',
-          html: 'Are you sure to Edit <b>Application : '+valuePush+'</b> ?',
+          html: 'Are you sure to Edit <b>role : '+valuePush+'</b> ?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -97,7 +97,7 @@ $(document).ready(function(){
       }
     });
 
-    $('#application').on('click','.remove_record',function(){
+    $('#role').on('click','.remove_record',function(){
 
       var id=$(this).data('id');
       var name=$(this).data('name');
@@ -105,7 +105,7 @@ $(document).ready(function(){
       $('#remove [name="id"]').val(id);
 
       Swal.fire({
-        html: 'Are you sure to remove <b>Application : '+name+'</b> ?',
+        html: 'Are you sure to remove <b>role : '+name+'</b> ?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,

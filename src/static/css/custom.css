@@ -60,3 +60,14 @@ iframe{
 .push-right{
 	text-align: right;
 }
+
+#notifications.alert{
+	z-index: 99999;
+	position: fixed;
+	bottom: 55px;
+    right: 10px;
+}
+
+.edit_record{
+	margin-left:5px; 
+}

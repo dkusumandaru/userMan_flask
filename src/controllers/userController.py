@@ -1,67 +1,97 @@
-from flask import render_template, request, redirect
-
+from flask import render_template, request, redirect, flash, url_for
+from flask_hashing import Hashing
 from app import app
 
 import os, sys
 sys.path.append('../')
+from models.User import db, User
+from systems import security
+from helpers.generator import generator
 
-from models.User import  db, User
+hashing = Hashing(app)
+
+@app.route('/user/list', methods=['GET'])
+def userList():
+    result = User.query.filter_by(is_deleted=False).all()
+    return render_template("user/index.html", data=enumerate(result,1))
+
+@app.route('/user/add', methods=['POST'])
+def userAdd():
+    if request.method == 'POST':
+        username = request.form['name']
+        email = request.form['email']
+        passview = generator.id_generator
+        password = hashing.hash_value(passview, salt=security.BlackJack._salt)
+        # password = request.form['password']
+        is_deleted = False
+        try:
+            user = User(username=username, email=email, password=password, passview=passview, is_deleted=is_deleted)
+            db.session.add(user)
+            db.session.commit()
+
+            flash('Insert successful...')
+        except Exception as e:            
+            flash('Insert failed!!!')
+
+    return redirect(url_for('userList'))
+
+@app.route('/user/edit', methods=['POST'])
+def userUpdate():
+    if request.method == 'POST':
+        username = request.form['name']
+        email = request.form['email']
+        id = request.form['id']
+        try:
+            user = User.query.get(id)
+            user.username = username
+            user.email = email
+            db.session.commit()
+            flash('Update successful...')
+        except Exception as e:
+            flash('Update failed!!!')
+    return redirect(url_for('userList'))
+
+@app.route('/user/change_password', methods=['POST'])
+def userUpdate():
+    if request.method == 'POST':
+        passwordLast = request.form['password']
+        passwordNew = request.form['password_new']
+        passwordRetype = request.form['password_retype']
+        id = request.form['id']
+
+        try:
+            user = User.query.get(id)
+            if user.password == passwordLast :
+                if passwordNew == passwordRetype :
+                    user.password = passwordNew
+                    db.session.commit()
+                    flash('Update successful...')
+                else:
+                    flash("New Password not match!!")                
+            else:
+                flash("Password not match!!")
 
 
 
-@app.route('/ts', methods=['GET'])
-def ts():
-
-    result = User.query.all()
-    print(result)
-    return render_template("home.html", data=enumerate(result,1))
-    return render_template("home.html")
 
 
-# @app.route('/', methods=['GET','POST'])
-# def index():
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         nim = request.form['nim']
-#         try:
-#             mhs = Mahasiswa(nim=nim, name=name)
-#             db.session.add(mhs)
-#             db.session.commit()
-#         except Exception as e:
-#             print("Failed to add data.")
-#             print(e)
-#     listMhs = Mahasiswa.query.all()
-#     print(listMhs)
-#     return render_template("home.html", data=enumerate(listMhs,1))
+        except Exception as e:
+            flash('Update failed!!!')
+    return redirect(url_for('userList'))
 
-# @app.route('/form-update/<int:id>')
-# def updateForm(id):
-#     mhs = Mahasiswa.query.filter_by(id=id).first()
-#     return render_template("form-update.html", data=mhs)
+@app.route('/user/remove', methods=['POST'])
+def userRemove():
+    if request.method == 'POST':
+        # name = request.form['name']
+        id = request.form['id']
+        is_deleted = True
+        try:
+            user = User.query.get(id)
+            user.is_deleted = is_deleted
 
-# @app.route('/form-update', methods=['POST'])
-# def update():
-#     if request.method == 'POST':
-#         id = request.form['id']
-#         name = request.form['name']
-#         nim = request.form['nim']
-#         try:
-#             mhs = Mahasiswa.query.filter_by(id=id).first()
-#             mhs.name = name
-#             mhs.nim = nim
-#             db.session.commit()
-#         except Exception as e:
-#             print("Failed to update data")
-#             print(e)
-#         return redirect("/")
+            db.session.commit()
+            flash('Remove successful...')
+        except Exception as e:
+            flash('Remove failed!!!')
 
-# @app.route('/delete/<int:id>')
-# def delete(id):
-#     try:
-#         mhs = Mahasiswa.query.filter_by(id=id).first()
-#         db.session.delete(mhs)
-#         db.session.commit()
-#     except Exception as e:
-#         print("Failed delete mahasiswa")
-#         print(e)
-#     return redirect("/")
+    return redirect(url_for('userList')) 

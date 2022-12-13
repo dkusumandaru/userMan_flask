@@ -1,6 +1,6 @@
 
 {%	extends	'layouts/index.html' %}
-{%	block title %} Application {%	endblock %}
+{%	block title %} Role {%	endblock %}
 {%	block body	%}
 
 	<div class="content-header">
@@ -8,7 +8,7 @@
 		<div class="row mb-2">
 			<div class="col-sm-6">
 			<h1 class="m-0 text-dark">
-				<b>Application</b><small></small>
+				<b>Role</b><small></small>
 			</h1>
 			</div>
 			<div class="col-sm-6">
@@ -36,7 +36,7 @@
 				</div>
 				<!-- /.card-header -->
 				<div class="card-body">
-					<table id="application" class="table table-bordered table-hover">
+					<table id="role" class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th><center>No </center></th>
@@ -84,12 +84,12 @@
 	
 
 
-	{% include 'application/v_modal_add.html' %}
-	{% include 'application/v_modal_edit.html' %}
-	{% include 'application/v_form_remove.html' %}
+	{% include 'role/v_modal_add.html' %}
+	{% include 'role/v_modal_edit.html' %}
+	{% include 'role/v_form_remove.html' %}
 
 
 	<script src="{{ url_for('static', filename='js/control/main.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/app/application.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app/role.js') }}"></script>
 
-{%	endblock	%}
+{%	endblock %}

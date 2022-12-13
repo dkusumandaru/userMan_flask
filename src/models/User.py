@@ -8,7 +8,8 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    role = db.Column(db.String, nullable=False)
+    passview = db.Column(db.String, nullable=False)
+    is_deleted = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
         return "<Name: {}>".format(self.name)
