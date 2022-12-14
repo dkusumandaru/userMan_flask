@@ -1,14 +1,12 @@
 $(document).ready(function(){
-    var table = $('#user').DataTable();
+    var table = $('#application').DataTable();
 
-    $('#user').on('click','.edit_record',function(){
+    $('#application').on('click','.edit_record',function(){
       $('#edit [name="id"]').val('');
       var id=$(this).data('id');
       var name=$(this).data('name');
-      var email=$(this).data('email');
       $('#edit [name="id"]').val(id);
       $('#edit [name="name"]').val(name);
-      $('#edit [name="email"]').val(email);
       $('#edit').modal('show');
       // $('#edit').submit();
     });
@@ -18,7 +16,7 @@ $(document).ready(function(){
 
       var modal = 'add';
       var data = getInput(modal);
-      // console.log(data);
+      console.log(data);
       var valuePush;
       var paramPush;
       
@@ -31,7 +29,7 @@ $(document).ready(function(){
         paramPush = idArr[0];
         Swal.fire({
           title: 'Create',
-          html: 'Are you sure to Create New <b>user : '+valuePush+'</b> ?',
+          html: 'Are you sure to Create New <b>Application : '+valuePush+'</b> ?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -39,7 +37,7 @@ $(document).ready(function(){
           confirmButtonText: 'Save'
         }).then((result) => {
 
-          // console.log(result.isConfirmed);
+          console.log(result.isConfirmed);
           if (result.isConfirmed) {
             $('#'+modal+'-form').submit();
           }else{
@@ -61,7 +59,7 @@ $(document).ready(function(){
 
       var modal = 'edit';
       var data = getInput(modal);
-      // console.log(data);
+      console.log(data);
       var valuePush;
       // var paramPush;
       
@@ -74,7 +72,7 @@ $(document).ready(function(){
         // paramPush = nameArr[0];
         Swal.fire({
           title: 'Edit',
-          html: 'Are you sure to Edit <b>user : '+valuePush+'</b> ?',
+          html: 'Are you sure to Edit <b>Application : '+valuePush+'</b> ?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -89,7 +87,7 @@ $(document).ready(function(){
         })
 
       }else{
-        // console.log('update failed');
+        console.log('update failed');
         const nameArr = data['name'];
         for (var i = 0; i < nameArr.length; i++) {
           $('#'+modal+' [name="'+nameArr[i]+'"]').addClass('is-invalid');
@@ -99,7 +97,7 @@ $(document).ready(function(){
       }
     });
 
-    $('#user').on('click','.remove_record',function(){
+    $('#application').on('click','.remove_record',function(){
 
       var id=$(this).data('id');
       var name=$(this).data('name');
@@ -107,7 +105,7 @@ $(document).ready(function(){
       $('#remove [name="id"]').val(id);
 
       Swal.fire({
-        html: 'Are you sure to remove <b>user : '+name+'</b> ?',
+        html: 'Are you sure to remove <b>Application : '+name+'</b> ?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,

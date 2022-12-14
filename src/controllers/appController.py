@@ -4,7 +4,7 @@ from app import app
 import os, sys
 sys.path.append('../')
 
-from models.App import  db, App
+from models.application import  db, App
 
 @app.route('/app/list', methods=['GET'])
 def appList():

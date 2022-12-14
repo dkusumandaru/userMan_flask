@@ -4,7 +4,7 @@ from app import app
 import os, sys
 sys.path.append('../')
 
-from models.Role import db, Role
+from models.role import db, Role
 
 @app.route('/role/list', methods=['GET'])
 def roleList():

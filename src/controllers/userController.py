@@ -4,7 +4,7 @@ from app import app
 
 import os, sys
 sys.path.append('../')
-from models.User import db, User
+from models.user import db, User
 from systems import security
 from helpers.generator import generator
 
@@ -18,14 +18,17 @@ def userList():
 @app.route('/user/add', methods=['POST'])
 def userAdd():
     if request.method == 'POST':
-        username = request.form['name']
+        name = request.form['name']
         email = request.form['email']
-        passview = generator.id_generator
-        password = hashing.hash_value(passview, salt=security.BlackJack._salt)
+        passview = generator.id_generator()
+        
+        salt = str(security.BlackJack._salt)
+        print(salt)
+        password = hashing.hash_value(passview, salt=salt)
         # password = request.form['password']
         is_deleted = False
         try:
-            user = User(username=username, email=email, password=password, passview=passview, is_deleted=is_deleted)
+            user = User(name=name, email=email, password=password, passview=passview, is_deleted=is_deleted)
             db.session.add(user)
             db.session.commit()
 
@@ -38,12 +41,12 @@ def userAdd():
 @app.route('/user/edit', methods=['POST'])
 def userUpdate():
     if request.method == 'POST':
-        username = request.form['name']
+        name = request.form['name']
         email = request.form['email']
         id = request.form['id']
         try:
             user = User.query.get(id)
-            user.username = username
+            user.name = name
             user.email = email
             db.session.commit()
             flash('Update successful...')
@@ -52,7 +55,7 @@ def userUpdate():
     return redirect(url_for('userList'))
 
 @app.route('/user/change_password', methods=['POST'])
-def userUpdate():
+def userUpdatePassword():
     if request.method == 'POST':
         passwordLast = request.form['password']
         passwordNew = request.form['password_new']

@@ -15,19 +15,23 @@ db = SQLAlchemy(app)
 hashing = Hashing(app)
 
 
-from routers import __init__
+# from routers import __init__
 # from controllers import userController
 from controllers import appController
 from controllers import roleController
+from controllers import userController
+from controllers import accessController
+from controllers import authController
 
 # @app.route('/')
 # def index():
 # 	print('Hello w')
 # 	return 'Hello WOrld'
 	
+@app.route('/', methods=['GET'])
+def root():
+	return 'try!'
 
-
-
-if __name__ == '__main__':
-	app.run(debug=True, port=8071)
-# 
+# if __name__ == '__main__':
+# 	port = int(os.environ.get('PORT', 5000))
+# 	app.run(debug=True, port=port)

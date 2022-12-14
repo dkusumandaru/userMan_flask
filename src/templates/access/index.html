@@ -1,6 +1,6 @@
 
 {%	extends	'layouts/index.html' %}
-{%	block title %} User {%	endblock %}
+{%	block title %} Access {%	endblock %}
 {%	block body	%}
 
 	<div class="content-header">
@@ -8,7 +8,7 @@
 		<div class="row mb-2">
 			<div class="col-sm-6">
 			<h1 class="m-0 text-dark">
-				<b>User</b><small></small>
+				<b>Access</b><small></small>
 			</h1>
 			</div>
 			<div class="col-sm-6">
@@ -36,12 +36,13 @@
 				</div>
 				<!-- /.card-header -->
 				<div class="card-body">
-					<table id="user" class="table table-bordered table-hover">
+					<table id="application" class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th><center>No </center></th>
-							<th><center>Name </center> </th>
-							<th><center>Email </center> </th>
+							<th><center>User </center> </th>
+							<th><center>Application </center> </th>
+							<th><center>Role </center> </th>
 							<th><center>Action </center> </th>
 						</tr>
 					</thead>
@@ -49,13 +50,16 @@
 						{% for no, row in data %}
 							<tr>
 								<td>{{ no }}</td>
-								<td>{{ row.name }}</td>
-								<td>{{ row.email }}</td>
+								<td>{{ row.userAccess.name }}</td>
+								<td>{{ row.roleAccess.name }}</td>
+								<td>{{ row.appAccess.name }}</td>
 								<td class="push-right">
 									<a class="edit_record btn-sm btn-warning" href="javascript:void(0);" 
 										data-id="{{ row.id }}"
-										data-name="{{ row.name }}"
-										data-email="{{ row.email }}"
+										data-name="{{ row.user }}"
+										data-user="{{ row.id_user }}"
+										data-role="{{ row.id_role }}"
+										data-app="{{ row.id_app }}"
 										><span class="fa fa-edit"></span> Edit
 									</a> | 
 									<a class="remove_record btn-sm btn-danger" href="javascript:void(0);"
@@ -87,12 +91,12 @@
 	
 
 
-	{% include 'user/v_modal_add.html' %}
-	{% include 'user/v_modal_edit.html' %}
-	{% include 'user/v_form_remove.html' %}
+	{% include 'access/v_modal_add.html' %}
+	{% include 'access/v_modal_edit.html' %}
+	{% include 'access/v_form_remove.html' %}
 
 
 	<script src="{{ url_for('static', filename='js/control/main.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/app/user.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app/access.js') }}"></script>
 
-{%	endblock %}
+{%	endblock	%}
