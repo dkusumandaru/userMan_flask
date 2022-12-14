@@ -1,6 +1,6 @@
 
 {%	extends	'layouts/index.html' %}
-{%	block title %} Application {%	endblock %}
+{%	block title %} User {%	endblock %}
 {%	block body	%}
 
 	<div class="content-header">
@@ -8,7 +8,7 @@
 		<div class="row mb-2">
 			<div class="col-sm-6">
 			<h1 class="m-0 text-dark">
-				<b>Application</b><small></small>
+				<b>User</b><small></small>
 			</h1>
 			</div>
 			<div class="col-sm-6">
@@ -36,11 +36,12 @@
 				</div>
 				<!-- /.card-header -->
 				<div class="card-body">
-					<table id="application" class="table table-bordered table-hover">
+					<table id="user" class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th><center>No </center></th>
 							<th><center>Name </center> </th>
+							<th><center>Email </center> </th>
 							<th><center>Action </center> </th>
 						</tr>
 					</thead>
@@ -49,10 +50,12 @@
 							<tr>
 								<td>{{ no }}</td>
 								<td>{{ row.name }}</td>
+								<td>{{ row.email }}</td>
 								<td class="push-right">
 									<a class="edit_record btn-sm btn-warning" href="javascript:void(0);" 
 										data-id="{{ row.id }}"
 										data-name="{{ row.name }}"
+										data-email="{{ row.email }}"
 										><span class="fa fa-edit"></span> Edit
 									</a> | 
 									<a class="remove_record btn-sm btn-danger" href="javascript:void(0);"
@@ -84,12 +87,12 @@
 	
 
 
-	{% include 'application/v_modal_add.html' %}
-	{% include 'application/v_modal_edit.html' %}
-	{% include 'application/v_form_remove.html' %}
+	{% include 'user/v_modal_add.html' %}
+	{% include 'user/v_modal_edit.html' %}
+	{% include 'user/v_form_remove.html' %}
 
 
 	<script src="{{ url_for('static', filename='js/control/main.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/app/application.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app/user.js') }}"></script>
 
-{%	endblock	%}
+{%	endblock %}

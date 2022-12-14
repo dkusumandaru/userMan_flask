@@ -4,56 +4,56 @@ from app import app
 import os, sys
 sys.path.append('../')
 
-from models.application import  db, App
+from models.role import db, Role
 
-@app.route('/app/list', methods=['GET'])
-def appList():
-    result = App.query.filter_by(is_deleted=False).all()
-    return render_template("application/index.html", data=enumerate(result,1))
+@app.route('/role/list', methods=['GET'])
+def roleList():
+    result = Role.query.filter_by(is_deleted=False).all()
+    return render_template("role/index.html", data=enumerate(result,1))
 
-@app.route('/app/add', methods=['POST'])
-def appAdd():
+@app.route('/role/add', methods=['POST'])
+def roleAdd():
     if request.method == 'POST':
         name = request.form['name']
         is_deleted = False
         try:
-            app = App(name=name, is_deleted=is_deleted)
-            db.session.add(app)
+            role = Role(name=name, is_deleted=is_deleted)
+            db.session.add(role)
             db.session.commit()
+
             flash('Insert successful...')
         except Exception as e:            
             flash('Insert failed!!!')
-    return redirect(url_for('appList'))
 
-@app.route('/app/edit', methods=['POST'])
-def appUpdate():
+    return redirect(url_for('roleList'))
+
+@app.route('/role/edit', methods=['POST'])
+def roleUpdate():
     if request.method == 'POST':
         name = request.form['name']
         id = request.form['id']
-        is_deleted = False
         try:
-            application = App.query.get(id)
-            application.name = name
+            role = Role.query.get(id)
+            role.name = name
             db.session.commit()
             flash('Update successful...')
         except Exception as e:
             flash('Update failed!!!')
+    return redirect(url_for('roleList'))
 
-    return redirect(url_for('appList'))
-
-@app.route('/app/remove', methods=['POST'])
-def appRemove():
+@app.route('/role/remove', methods=['POST'])
+def roleRemove():
     if request.method == 'POST':
         # name = request.form['name']
         id = request.form['id']
         is_deleted = True
         try:
-            application = App.query.get(id)
-            application.is_deleted = is_deleted
+            role = Role.query.get(id)
+            role.is_deleted = is_deleted
 
             db.session.commit()
             flash('Remove successful...')
         except Exception as e:
             flash('Remove failed!!!')
 
-    return redirect(url_for('appList')) 
+    return redirect(url_for('roleList')) 

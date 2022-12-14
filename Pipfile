@@ -9,6 +9,8 @@ flask-sqlalchemy = "*"
 sqlalchemy = "*"
 mysqlclient = "*"
 flash = "*"
+flask-hashing = "*"
+jsonify = "*"
 
 [dev-packages]
 
