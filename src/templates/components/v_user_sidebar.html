@@ -15,10 +15,8 @@
       </div>-->
       <div class="info">
         <a class="d-block">
-          <b><!-- username--></b><br>
-          <b><i><!-- role --></i></b> 
-            /  <!--role-->
-
+          <b>{{ session['username'] }}</b><br>
+          <b><i>{{ session['role'] }}</i></b>
         </a>
       </div>
     </div>
@@ -26,7 +24,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="app/dashboard" class="nav-link">
+          <a href="/dashboard" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -67,7 +65,7 @@
 
 
           <li class="nav-item">
-            <a href="/Access" class="nav-link">
+            <a href="/access/list" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
               <p>
                 Access
