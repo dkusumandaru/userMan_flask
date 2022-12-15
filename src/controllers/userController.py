@@ -74,10 +74,6 @@ def userUpdatePassword():
             else:
                 flash("Password not match!!")
 
-
-
-
-
         except Exception as e:
             flash('Update failed!!!')
     return redirect(url_for('userList'))

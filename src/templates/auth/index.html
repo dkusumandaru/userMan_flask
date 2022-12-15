@@ -1,6 +1,6 @@
 
 {%	extends	'layouts/single.html' %}
-{%	block title %} Caffe Area {%	endblock %}
+{%	block title %} CaffeeArea {%	endblock %}
 {%	block body	%}
 
 <div class="login-box">
@@ -13,7 +13,7 @@
 		<p class="login-box-msg">
 		</p>
 
-			<form action="" method="POST"></form>
+			<form action="{{ url_for('espresso') }}" method="POST">
 				<div class="input-group mb-3">
 					<input type="email" name="email" class="form-control" placeholder="Email">
 					<div class="input-group-append">
